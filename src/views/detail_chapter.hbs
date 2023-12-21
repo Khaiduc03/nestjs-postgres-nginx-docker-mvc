@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Details chapter</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body class="bg-gradient-primary" style="background: rgb(254,254,255);margin: 20px;">
+    <div class="container-fluid"><!-- Start: Split Button Secondary --><a
+            href="/comic/detail_comic?comic_uuid={{chapter.[0].comic_uuid}}" class="btn btn-secondary btn-icon-split"
+            role="button"><span class="text-white-50 icon"><i class="fas fa-arrow-left"></i></span><span
+                class="text-white text" style="background: #66c64e;">Back</span></a>
+        <!-- End: Split Button Secondary --><!-- Start: Split Button Danger --><a
+            class="btn btn-danger float-sm-end btn-icon-split" role="button"><span class="text-white-50 icon"><i
+                    class="fas fa-trash"></i></span><span class="text-white text">Delete
+                chapter</span></a><!-- End: Split Button Danger -->
+        <button class="btn btn-success float-sm-end btn-icon-split" role="button">
+            <span class="text-white-50 icon"><i class="fas fa-plus"></i></span>
+            <span class="text-white text">Add Picture</span>
+        </button>
+        <h3 class="text-dark mb-4" style="padding: 20px;">Information of chapter</h3><!-- Start: Lightbox Gallery -->
+        <section class="photo-gallery py-4 py-xl-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h1 class="fw-bold text-primary">{{chapter.[0].comic_name}}</h1>
+                        <h2>{{chapter.[0].chapter_name}}</h2>
+                    </div>
+                </div><!-- Start: Photos -->
+                <div class="row gx-1 gy-1">
+                    {{#each chapter}}
+                    <div class="col-12">
+                        <div class="item">
+                            <a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid"
+                                    src="{{this.url}}"></a>
+                            <div class="d-flex flex-row justify-content-center align-items-center align-content-center justify-content-xxl-center"
+                                style="padding-right: 0px;margin-right: 0px;padding-left: 1px;">
+                                <label class="form-label">page {{this.page}}</label>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end"
+                                style="padding-right: 21px;padding-left: 21px;">
+                                <button class="btn btn-primary" type="button">Edit</button>
+                                <button class="btn btn-primary" type="button"
+                                    style="background: #a9362e;">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+            </div>
+        </section><!-- End: Lightbox Gallery -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+</body>
+
+</html>

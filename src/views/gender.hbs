@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Table - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="/gender">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>Comicverse</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/home"><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user"><span>User</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/comic">Comic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/fourm"><span>Fourm</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/gender"><span>Gender</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="card shadow">
+                        <div class="card-header d-xxl-flex flex-row justify-content-between align-items-center py-3">
+                            <p class="lead text-primary d-xxl-flex justify-content-around flex-sm-row m-0 fw-bold">
+                                Gender&nbsp; Dashboard</p><!-- Start: Split Button Warning --><a
+                                class="btn btn-warning btn-icon-split" role="button" href="/gender/add_gender"><span
+                                    class="text-white-50 icon"><i class="fas fa-plus"></i></span><span
+                                    class="text-white text">ADD NEW GENDER</span></a><!-- End: Split Button Warning -->
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">Show&nbsp;<select
+                                                class="d-inline-block form-select form-select-sm">
+                                                <option value="10" selected="">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <th style="width: 200px;">Option</th>
+                                            </select>&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+                                            class="form-label"><input type="search" class="form-control form-control-sm"
+                                                aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                                aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 250px;">Image</th>
+                                            <th style="width: 220px;">uuid</th>
+                                            <th style="width: 250px;">Gender name</th>
+                                            <th style="width: 220px;">Description</th>
+                                            <th style="width: 200px;">Created_at</th>
+                                            <th style="width: 200px;">Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="genderTableBody"></tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th style="width: 250px;">Image</th>
+                                            <th style="width: 220px;">uuid</th>
+                                            <th style="width: 250px;">Gender name</th>
+                                            <th style="width: 220px;">Description</th>
+                                            <th style="width: 200px;">Created_at</th>
+                                            <th style="width: 200px;">Option</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                        Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav
+                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <div id="pagination">
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white stidcky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+
+
+    <script>
+        let currentPage = 1;
+
+        async function fetchDataAndRenderTable(page) {
+            try {
+                const accessToken = localStorage.getItem('access_token');
+
+                const headers = new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                });
+
+                const requestOptions = {
+                    method: 'GET',
+                    headers: headers
+                };
+
+                const response = await fetch(`/v1/api/topic/v1?page=${page}`, requestOptions);
+                const data = await response.json();
+
+                updateTable(data.data.data);
+                updatePagination(data.data.currentPage, data.data.totalPage);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function updateTable(data) {
+            const tableBody = document.getElementById('genderTableBody');
+
+            // Xóa nội dung cũ của bảng
+            tableBody.innerHTML = '';
+
+            // Thêm dữ liệu mới vào bảng
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                // Tạo các ô (td) và thêm vào hàng (tr) tương ứng
+                const imageCell = document.createElement('td');
+                imageCell.innerHTML = `<img class="img-thumbnail me-2" width="120px" height="120" src="${item.image_url}" style="width: 120px;height: 120px;border-style: none;">`;
+                row.appendChild(imageCell);
+
+                const uuidCell = document.createElement('td');
+                uuidCell.textContent = item.uuid;
+                row.appendChild(uuidCell);
+
+                const genderNameCell = document.createElement('td');
+                genderNameCell.textContent = item.name;
+                row.appendChild(genderNameCell);
+
+                const descriptionCell = document.createElement('td');
+                descriptionCell.textContent = item.description;
+                row.appendChild(descriptionCell);
+
+                const created_at = document.createElement('td');
+                created_at.textContent = item.created_at;
+                row.appendChild(created_at);
+
+                const optionCell = document.createElement('td');
+                optionCell.innerHTML = `
+            <button class="btn btn-success btn-circle ms-1" style="margin: 0px 4px 0px 0px;" onclick="goToDetailPage('${item.uuid}')">
+                <i class="fas fa-arrow-right text-white"></i>
+            </button>
+            <button class="btn btn-danger btn-icon-split" onclick="deleteGender('${item.uuid}')">
+                <span class="text-white-50 icon"><i class="fas fa-flag"></i></span>
+            </button>
+        `;
+                row.appendChild(optionCell);
+
+
+                // Thêm hàng vào nội dung bảng
+                tableBody.appendChild(row);
+            });
+        }
+
+        function updatePagination(currentPage, totalPage) {
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
+
+            for (let i = 1; i <= totalPage; i++) {
+                const button = document.createElement('button');
+                button.innerText = i;
+
+                if (i === currentPage) {
+                    button.classList.add('active');
+                }
+
+                button.addEventListener('click', () => {
+                    currentPage = i;
+                    fetchDataAndRenderTable(currentPage);
+                });
+
+                paginationDiv.appendChild(button);
+            }
+        }
+
+        async function deleteGender(uuid) {
+            if (confirm('Are you sure you want to delete this gender?')) {
+              try {
+              const accessToken = localStorage.getItem('access_token');
+
+              const headers = new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+              });
+
+              const requestOptions = {
+                method: 'DELETE',
+                headers: headers,
+              };
+
+              const response = await fetch(`/v1/api/topic/delete/v2?uuid=${uuid}`, requestOptions);
+              const data = await response.json();
+              console.log("deleteGender ~ data:", data);
+
+              fetchDataAndRenderTable(currentPage);
+
+            } catch (error) {
+            console.error('Error deleting gender:', error);
+            }
+        }
+      }
+
+      function goToDetailPage(uuid) {
+        // Chuyển hướng đến trang chi tiết với uuid được truyền vào
+        // Thay đổi window.location.href thành đường dẫn chính xác của trang chi tiết
+        console.log("goToDetailPage -> uuid", uuid)
+        window.location.href = `/gender/detail_gender?gender_uuid=${uuid}`;
+
+      }
+
+      document.addEventListener('DOMContentLoaded', () => fetchDataAndRenderTable(currentPage));
+    </script>
+</body>
+
+
+</html>

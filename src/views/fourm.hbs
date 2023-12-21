@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Table - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="/comic.html">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>Comicverse</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/home"><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user"><span>User</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/comic">Comic</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/fourm"><span>Fourm</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/gender"><span>Gender</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="card shadow">
+                        <div class="card-header d-xxl-flex flex-row justify-content-between align-items-center py-3">
+                            <p class="lead text-primary d-xxl-flex justify-content-around flex-sm-row m-0 fw-bold">
+                                Comic&nbsp; Dashboard</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">Show&nbsp;<select
+                                                class="d-inline-block form-select form-select-sm">
+                                                <option value="10" selected="">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <th style="width: 200px;">Option</th>
+                                            </select>&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+                                            class="form-label"><input type="search" class="form-control form-control-sm"
+                                                aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                                aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 250px;">Images</th>
+                                            <th style="width: 220px;">uuid</th>
+                                            <th style="width: 250px;">user</th>
+                                            <th style="width: 220px;">content</th>
+                                            <th style="width: 200px;">like</th>
+                                            <td style="width: 200px;">comment</td>
+                                            <th style="width: 150px;">status</th>
+                                            <th style="width: 200px;">created_at</th>
+                                            <th style="width: 200px;">Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="forumTableBody"></tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th style="width: 250px;">Images</th>
+                                            <th style="width: 220px;">uuid</th>
+                                            <th style="width: 250px;">user</th>
+                                            <th style="width: 220px;">content</th>
+                                            <th style="width: 200px;">like</th>
+                                            <td style="width: 200px;">comment</td>
+                                            <th style="width: 150px;">status</th>
+                                            <th style="width: 200px;">created_at</th>
+                                            <th style="width: 200px;">Option</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                        Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav
+                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <div id="pagination">
+
+                                        </div>
+
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+
+
+    <script>
+        let currentPage = 1;
+        let dataImages = {}; // Store data globally
+        let imageIndexes = {}; // 
+        async function fetchDataAndRenderTable(page) {
+            try {
+                const accessToken = localStorage.getItem('access_token');
+
+                const headers = new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                });
+
+                const requestOptions = {
+                    method: 'GET',
+                    headers: headers
+                };
+
+                const response = await fetch(`/v1/api/forum/v2?page=${page}`, requestOptions);
+
+
+                const data = await response.json();
+                dataImages = data.data.data; // Store data globally
+                updateTable(dataImages);
+                updatePagination(data.data.currentPage, data.data.totalPage);
+            } catch (error) {
+                alert('Error fetching data: ' + error);
+            }
+        }
+        function updateTable(data) {
+            const tableBody = document.getElementById('forumTableBody');
+
+            // Xóa nội dung cũ của bảng
+            tableBody.innerHTML = '';
+
+            // Thêm dữ liệu mới vào bảng
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                // Tạo các ô (td) và thêm vào hàng (tr) tương ứng
+                const imageCell = document.createElement('td');
+
+                // Initialize current image index for each item
+                let currentImageIndex = 0;
+
+                // HTML for the image and navigation buttons
+                imageCell.innerHTML = `
+            <div class="image-container${item.uuid}"">
+                <img class="img-thumbnail me-2" width="200px" height="200" src="${item.images[currentImageIndex]}" style="width: 250px; height: 250px; border-style: none;">
+                <button class="btn btn-primary btn-sm" onclick="prevImage('${item.uuid}')">Previous</button>
+                <button class="btn btn-primary btn-sm" onclick="nextImage('${item.uuid}')">Next</button>
+            </div>
+        `;
+                row.appendChild(imageCell);
+
+                //
+
+                const uuidCell = document.createElement('td');
+                uuidCell.textContent = item.uuid;
+                row.appendChild(uuidCell);
+
+                const userCell = document.createElement('td');
+
+                // Add user_avatar above user_uuid and user_fullname
+                const userAvatarImg = document.createElement('img');
+                userAvatarImg.src = item.user_avatar;
+                userAvatarImg.alt = 'User Avatar';
+                userAvatarImg.style.width = '150px'; // Adjust the width as needed
+                userAvatarImg.style.marginBottom = '10px'; // Add margin for spacing
+                // Append the user_avatar to userCell
+                userCell.appendChild(userAvatarImg);
+
+                // Concatenate user_uuid and user_fullname with a line break
+                userCell.innerHTML += `<br><strong>${item.user_fullname}</strong><br>${item.user_uuid}`;
+
+                row.appendChild(userCell);
+
+                const content = document.createElement('td');
+                content.textContent = item.content;
+                row.appendChild(content);
+
+                const like = document.createElement('td');
+                like.textContent = item.like_count;
+                row.appendChild(like);
+
+                const comment = document.createElement('td');
+                comment.textContent = item.comment_count;
+                row.appendChild(comment);
+
+                const status = document.createElement('td');
+                status.textContent = item.status;
+                row.appendChild(status);
+
+                const created_at = document.createElement('td');
+                created_at.textContent = item.created_at;
+                row.appendChild(created_at);
+
+
+                const optionCell = document.createElement('td');
+                optionCell.innerHTML = `
+    
+            <button class="btn btn-danger btn-icon-split" onclick="deleteForum('${item.uuid}')">
+                <span class="text-white-50 icon"><i class="fas fa-flag"></i></span>
+            </button>
+        `;
+                row.appendChild(optionCell);
+
+                // Thêm hàng vào nội dung bảng
+                tableBody.appendChild(row);
+            });
+        }
+
+
+        async function deleteForum(uuid) {
+            if (confirm('Are you sure you want to delete this forum?')) {
+
+                try {
+                    const accessToken = localStorage.getItem('access_token');
+
+                    const headers = new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`
+                    });
+
+                    const requestOptions = {
+                        method: 'DELETE',
+                        headers: headers,
+                        body: JSON.stringify({
+                            forum_uuid: uuid
+                        })
+                    };
+                    const response = await fetch(`/v1/api/forum/delete-post-by-admin`, requestOptions);
+                    const data = await response.json();
+                    if (data?.statusCode === 403) {
+                        alert('You do not have permission to delete this forum');
+                    } else if (data?.code === 200) {
+                        alert('Delete forum successfully');
+                        fetchDataAndRenderTable(currentPage);
+                    } else {
+                        alert('Error deleting forum');
+                    }
+
+                } catch (error) {
+                    alert('Error deleting forum');
+                }
+
+            }
+        }
+        function prevImage(uuid) {
+            const currentImageIndex = getCurrentImageIndex(uuid);
+            const updatedIndex = (currentImageIndex - 1 + dataImages.find(item => item.uuid === uuid).images.length) % dataImages.find(item => item.uuid === uuid).images.length;
+            updateImage(uuid, updatedIndex);
+        }
+
+        // Function to navigate to the next image for a specific item
+        function nextImage(uuid) {
+            const currentImageIndex = getCurrentImageIndex(uuid);
+            const updatedIndex = (currentImageIndex + 1) % dataImages.find(item => item.uuid === uuid).images.length;
+            console.log(uuid)
+            updateImage(uuid, updatedIndex);
+        }
+
+        // Helper function to get the current image index for a specific item
+        function getCurrentImageIndex(uuid) {
+            // You might want to implement a way to store and retrieve the current image index for each item
+            // This can be done using a JavaScript object, localStorage, or any other suitable method
+            // For simplicity, let's assume we have a global object called 'imageIndexes' for this purpose
+
+            // Initialize the image index for the item if it's not set yet
+            if (!imageIndexes[uuid]) {
+                imageIndexes[uuid] = 0;
+            }
+
+            return imageIndexes[uuid];
+        }
+
+        // Helper function to update the src attribute of the image for a specific item
+
+        function updateImage(uuid, newIndex) {
+            console.log(uuid);  // This line logs the uuid correctly
+            imageIndexes[uuid] = newIndex;
+
+            // Find the item with the matching UUID in dataImages
+            const item = dataImages.find(item => item.uuid === uuid);
+            const imageContainer = document.querySelector(`.image-container${item.uuid} img`);
+
+            imageContainer.src = item.images[newIndex]; // This line logs the imageContainer
+        }
+
+        function updatePagination(currentPage, totalPage) {
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
+
+            for (let i = 1; i <= totalPage; i++) {
+                const button = document.createElement('button');
+                button.innerText = i;
+
+                if (i === currentPage) {
+                    button.classList.add('active');
+                }
+
+                button.addEventListener('click', () => {
+                    currentPage = i;
+                    fetchDataAndRenderTable(currentPage);
+                });
+
+                paginationDiv.appendChild(button);
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => fetchDataAndRenderTable(currentPage));
+    </script>
+</body>
+
+
+</html>

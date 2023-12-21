@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Comic Detail</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body class="bg-gradient-primary" style="background: rgb(254,254,255);margin: 20px;">
+    <div class="container-fluid">
+        <a class="btn btn-secondary btn-icon-split" role="button" href="/comic">
+            <span class="text-white-50 icon"><i class="fas fa-arrow-left"></i></span>
+            <span class="text-white text" style="background: #66c64e;">Back</span>
+        </a>
+        <h3 class="text-dark mb-4" style="padding: 20px;">Information of comic</h3>
+
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center shadow">
+                        <img id="comicImage" class="img-thumbnail mb-3 mt-4" src="{{data.image_url}}" width="200"
+                            height="200">
+
+                        <div class="mb-3"></div>
+                        <button class="btn btn-info btn-icon-split" role="button" id="save_image">
+                            <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                            <span class="text-white text" id="editImageBtnText">Save Image</span>
+                        </button>
+                        <input type="file" id="upload4" style="display: none">
+
+                        <!-- Add a button to trigger the file input -->
+                        <button class="btn btn-info btn-icon-split" role="button" id="uploadButton">
+                            <span class="text-white-50 icon"><i class="fas fa-upload"></i></span>
+                            <span class="text-white text">Upload 4</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="card shadow mb-4"></div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="row mb-3 d-none">
+                    <!-- ... (datat of your HTML remains unchanged) ... -->
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div
+                                class="card-header d-flex flex-row justify-content-between align-items-xxl-center py-3">
+                                <p class="text-primary m-0 fw-bold">User Information</p>
+                                <a class="btn btn-success btn-icon-split" role="button" id="editBtn">
+                                    <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                                    <span class="text-white text" id="editBtnText">Edit</span>
+                                </a>
+                            </div>
+
+                            <div class="card-body">
+                                <form id="editForm">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="uuid"><strong>UUID</strong></label>
+                                                <input class="form-control" type="text" id="uuid" placeholder="UUID"
+                                                    name="uuid" value="{{data.uuid}}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="comic_name"><strong>Comic
+                                                        Name</strong></label>
+                                                <input class="form-control" type="text" id="comic_name"
+                                                    placeholder="Comic Name" name="comic_name"
+                                                    value="{{data.comic_name}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="is_public"><strong>Is
+                                                        Public</strong></label>
+                                                <input class="form-control" type="text" id="is_public"
+                                                    placeholder="Is Public" name="is_public" value="{{data.isPublic}}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="author"><strong>Author</strong></label>
+                                                <input class="form-control" type="text" id="author" placeholder="Author"
+                                                    name="author" value="{{data.author}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            <button class="btn btn-info btn-icon-split" role="button" id="addTopicBtn">
+                                                <span class="text-white-50 icon"><i class="fas fa-plus"></i></span>
+                                                <span class="text-white text">Add Topic</span>
+                                            </button>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="topics"><strong>Selected
+                                                        Topics</strong></label>
+                                                <ul id="selectedTopicsList">
+                                                    {{#each data.topics}}
+                                                    <li>
+                                                        <span>{{this}}</span>
+                                                        <button
+                                                            class="btn btn-danger btn-sm ms-2 delete-topic-btn">Delete</button>
+                                                    </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="topics"><strong>Topics</strong></label>
+                                                <select class="form-select" id="topics" name="topics1" disabled>
+                                                    <!-- Options will be dynamically populated using JavaScript -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="views"><strong>Views</strong></label>
+                                                <input class="form-control" type="text" id="views" placeholder="Views"
+                                                    name="views" value="{{data.views}}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="average_rating"><strong>Average
+                                                        Rating</strong></label>
+                                                <input class="form-control" type="text" id="average_rating"
+                                                    placeholder="Average Rating" name="average_rating"
+                                                    value="{{data.average_rating}}">
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col">
+
+                                            <div class="mb-3">
+                                                <label class="form-label"
+                                                    for="signature"><strong>Description</strong></label>
+                                                <textarea class="form-control" id="signature-1" rows="9"
+                                                    name="description" id="description"
+                                                    placeholder="description">{{data.description}}</textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="card shadow">
+                            <div
+                                class="card-header d-flex flex-row justify-content-between align-items-xxl-center py-3">
+                                <p class="text-primary m-0 fw-bold">List chapter</p>
+                                <!-- Start: Split Button Success --><a class="btn btn-success btn-icon-split"
+                                    role="button" style="background: #9c9237;" href="/chapter/add_chapter"><span
+                                        class="text-white-50 icon"><i class="fas fa-plus"
+                                            style="font-size: 18px;"></i></span><span class="text-white text"
+                                        style="--bs-success: #1cc88a;--bs-success-rgb: 28,200,138;">Add
+                                        chapter</span></a><!-- End: Split Button Success -->
+                            </div>
+                            <div class="card-body">
+                                <ol start="0">
+                                    <li class="flex-row">Chapter 1<a class="btn btn-success btn-circle ms-1"
+                                            role="button" style="margin: 0px 2px 0px 20px;width: 28px;height: 28px;"
+                                            href="/detail_chapter/4e23234"><i
+                                                class="fas fa-chevron-right text-white"></i></a></li>
+
+                                    {{#each chapter}}
+                                    <li>
+                                        <span>{{this.chapter_name}}</span>
+                                        <a class="btn btn-success btn-circle ms-1" role="button"
+                                            style="margin: 0px 2px 0px 20px;width: 28px;height: 28px;"
+                                            href="/detail_chapter/{{../data.uuid}}?chapter_number={{this.chapter_number}}"><i
+                                                class="fas fa-chevron-right text-white"></i></a>
+                                    </li>
+                                    </li>
+                                    {{/each}}
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var editBtn = document.getElementById("editBtn");
+            var editBtnText = document.getElementById("editBtnText");
+            var editForm = document.getElementById("editForm");
+            var addTopicBtn = document.getElementById("addTopicBtn");
+            var selectedTopicsList = document.getElementById("selectedTopicsList");
+            var topicsSelect = document.getElementById("topics");
+
+            var editImageBtnText = document.getElementById("editImageBtnText");
+            var formElements = editForm.elements;
+            var upload4 = document.getElementById("upload4");
+            var uploadButton = document.getElementById("uploadButton");
+            var comicImage = document.getElementById("comicImage");
+            var saveImageBtn = document.getElementById("save_image");
+            var topicsSelect = document.getElementById("topics");
+            var accessToken = localStorage.getItem("access_token");
+            // Handle the "Add Topic" button click
+            addTopicBtn.addEventListener("click", function (event) {
+                event.preventDefault(); // Add this line to prevent form submission
+
+                var selectedTopic = topicsSelect.value;
+
+                if (selectedTopic && !selectedTopicsList.querySelector(`[data-topic="${selectedTopic}"]`)) {
+                    var listItem = document.createElement("li");
+                    listItem.dataset.topic = selectedTopic;
+
+                    var topicText = document.createElement("span");
+                    topicText.textContent = selectedTopic;
+
+                    var deleteButton = document.createElement("button");
+                    deleteButton.className = "btn btn-danger btn-sm ms-2 delete-topic-btn";
+                    deleteButton.textContent = "Delete";
+                    deleteButton.addEventListener("click", function () {
+                        listItem.remove();
+                    });
+
+                    listItem.appendChild(topicText);
+                    listItem.appendChild(deleteButton);
+
+                    selectedTopicsList.appendChild(listItem);
+                }
+            });
+
+            // Handle the "Delete Topic" button click
+            selectedTopicsList.addEventListener("click", function (event) {
+                if (event.target.classList.contains("delete-topic-btn")) {
+                    event.target.closest("li").remove();
+                }
+            });
+
+
+
+            saveImageBtn.addEventListener("click", function () {
+                // Get the selected file
+                var selectedFile = upload4.files[0];
+                console.log("Selected file:", selectedFile);
+                // Check if a file is selected
+                if (selectedFile) {
+                    // Create a FormData object and append the file to it
+                    var formData = new FormData();
+                    formData.append("image", selectedFile);
+                    formData.append("uuid", `{{data.uuid}}`);
+                    console.log("Form data:", formData);
+                    // Make a POST request to your API endpoint
+                    fetch("/v1/api/comic/update-image", {
+                        method: "PUT",
+                        body: formData,
+                        headers: {
+                            "Authorization": "Bearer " + accessToken,
+                        },
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Handle the response data
+                            console.log("Image uploaded successfully:", data);
+                            // Update the image URL or perform any other necessary actions
+                        })
+                        .catch(error => {
+                            console.error("Error during image upload:", error);
+                        });
+                } else {
+                    console.error("No file selected");
+                }
+            });
+
+            //get all topics
+            function fetchTopics() {
+                fetch("/v1/api/topic", {
+                    headers: {
+                        "Authorization": "Bearer " + accessToken,
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the dropdown with options
+                        data.data.forEach(topic => {
+                            var option = document.createElement("option");
+                            option.value = topic.name;
+                            option.text = topic.name;
+                            topicsSelect.add(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error fetching topics:", error);
+                    });
+            }
+
+            // Handle the file input change event   
+            function gatherFormData() {
+                var formData = {};
+
+                for (var i = 0; i < formElements.length; i++) {
+                    var element = formElements[i];
+
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                        formData[element.name] = element.value;
+                    }
+                }
+                formData.topics = Array.from(selectedTopicsList.querySelectorAll('li span')).map(function (topicSpan) {
+                    return topicSpan.textContent;
+                });
+
+                return formData;
+            }
+            function sendDataToApi() {
+                var formData = gatherFormData();
+
+                fetch("/v1/api/comic/update", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + accessToken,
+                    },
+                    body: JSON.stringify(formData),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response data
+                        console.log("Data updated successfully:", data);
+                        // Additional actions if needed
+                    })
+                    .catch(error => {
+                        console.error("Error updating data:", error);
+                    });
+            }
+
+            uploadButton.addEventListener("click", function () {
+                upload4.click();
+            });
+
+            upload4.addEventListener("change", function (event) {
+                // Handle the file upload logic here
+                var selectedFile = event.target.files[0];
+                console.log("Selected file:", selectedFile);
+                // Add your file upload logic here
+                comicImage.src = URL.createObjectURL(selectedFile);
+            });
+            // Disable form fields initially
+            for (var i = 0; i < formElements.length; i++) {
+                var element = formElements[i];
+
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                    element.disabled = true;
+                }
+            }
+
+            // Handle Edit/Save button click
+            editBtn.addEventListener("click", function () {
+                // Toggle the disabled attribute for form fields
+                for (var i = 0; i < formElements.length; i++) {
+                    var element = formElements[i];
+
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT" || element.tagName === "UL") {
+                        element.disabled = !element.disabled;
+                    }
+                }
+
+                // Change button text between "Edit" and "Save"
+                if (editBtnText.innerText === "Edit") {
+                    editBtnText.innerText = "Save";
+                    topicsSelect.removeAttribute("disabled");
+                    fetchTopics();
+                } else {
+
+                    for (var i = 0; i < formElements.length; i++) {
+                        var element = formElements[i];
+
+                        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                            element.disabled = true;
+                        }
+                    }
+                    sendDataToApi();
+                    editBtnText.innerText = "Edit";
+                }
+            });
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

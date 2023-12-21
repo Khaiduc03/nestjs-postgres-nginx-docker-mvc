@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Gender Detail</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body class="bg-gradient-primary" style="background: rgb(254,254,255);margin: 20px;">
+    <div class="container-fluid">
+        <a class="btn btn-secondary btn-icon-split" role="button" href="/gender">
+            <span class="text-white-50 icon"><i class="fas fa-arrow-left"></i></span>
+            <span class="text-white text" style="background: #66c64e;">Back</span>
+        </a>
+        <h3 class="text-dark mb-4" style="padding: 20px;">Information of gender</h3>
+
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center shadow">
+                        <img id="genderImage" class="img-thumbnail mb-3 mt-4" src="{{data.image_url}}" width="200"
+                            height="200">
+
+                        <div class="mb-3"></div>
+                        <button class="btn btn-info btn-icon-split" role="button" id="save_image">
+                            <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                            <span class="text-white text" id="editImageBtnText">Save Image</span>
+                        </button>
+                        <input type="file" id="upload4" style="display: none">
+
+                        <!-- Add a button to trigger the file input -->
+                        <button class="btn btn-info btn-icon-split" role="button" id="uploadButton">
+                            <span class="text-white-50 icon"><i class="fas fa-upload"></i></span>
+                            <span class="text-white text">Upload 4</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="card shadow mb-4"></div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="row mb-3 d-none">
+                    <!-- ... (datat of your HTML remains unchanged) ... -->
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div
+                                class="card-header d-flex flex-row justify-content-between align-items-xxl-center py-3">
+                                <p class="text-primary m-0 fw-bold">Gender Information</p>
+                                <a class="btn btn-success btn-icon-split" role="button" id="editBtn">
+                                    <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                                    <span class="text-white text" id="editBtnText">Edit</span>
+                                </a>
+                            </div>
+
+                            <div class="card-body">
+                                <form id="editForm">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="uuid"><strong>UUID</strong></label>
+                                                <input class="form-control" type="text" id="uuid" placeholder="UUID"
+                                                    name="uuid" value="{{data.uuid}}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="name"><strong>Gender
+                                                        Name</strong></label>
+                                                <input class="form-control" type="text" id="name"
+                                                    placeholder="Gender Name" name="name"
+                                                    value="{{data.name}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col">
+
+                                            <div class="mb-3">
+                                                <label class="form-label"
+                                                    for="signature"><strong>Description</strong></label>
+                                                <textarea class="form-control" id="signature-1" rows="9"
+                                                    name="description" id="description"
+                                                    placeholder="description">{{data.description}}</textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var editBtn = document.getElementById("editBtn");
+            var editBtnText = document.getElementById("editBtnText");
+            var editForm = document.getElementById("editForm");
+            var addTopicBtn = document.getElementById("addTopicBtn");
+
+            var editImageBtnText = document.getElementById("editImageBtnText");
+            var formElements = editForm.elements;
+            var upload4 = document.getElementById("upload4");
+            var uploadButton = document.getElementById("uploadButton");
+            var genderImage = document.getElementById("genderImage");
+            var saveImageBtn = document.getElementById("save_image");
+            var accessToken = localStorage.getItem("access_token");
+
+            saveImageBtn.addEventListener("click", function () {
+                // Get the selected file
+                var selectedFile = upload4.files[0];
+
+                // Check if a file is selected
+                if (selectedFile) {
+                    // Create a FormData object and append the file to it
+                    var formData = new FormData();
+                    formData.append("image", selectedFile);
+                    formData.append("uuid", `{{data.uuid}}`);
+
+                    // Make a POST request to your API endpoint
+                    fetch("/v1/api/comic/update-image", {
+                        method: "PUT",
+                        body: formData,
+                        headers: {
+                            "Authorization": "Bearer " + accessToken,
+                        },
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Handle the response data
+                            console.log("Image uploaded successfully:", data);
+                            // Update the image URL or perform any other necessary actions
+                        })
+                        .catch(error => {
+                            console.error("Error during image upload:", error);
+                        });
+                } else {
+                    console.error("No file selected");
+                }
+            });
+
+            // Handle the file input change event
+            function gatherFormData() {
+                var formData = {};
+
+                for (var i = 0; i < formElements.length; i++) {
+                    var element = formElements[i];
+
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                        formData[element.name] = element.value;
+                    }
+                }
+
+                return formData;
+            }
+            function sendDataToApi() {
+                var formData = gatherFormData();
+
+                fetch("/v1/api/topic/update", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + accessToken,
+                    },
+                    body: JSON.stringify(formData),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response data
+                        console.log("Data updated successfully:", data);
+                        // Additional actions if needed
+                    })
+                    .catch(error => {
+                        console.error("Error updating data:", error);
+                    });
+            }
+
+            uploadButton.addEventListener("click", function () {
+                upload4.click();
+            });
+
+            upload4.addEventListener("change", function (event) {
+                // Handle the file upload logic here
+                var selectedFile = event.target.files[0];
+                console.log("Selected file:", selectedFile);
+                // Add your file upload logic here
+                genderImage.src = URL.createObjectURL(selectedFile);
+            });
+            // Disable form fields initially
+            for (var i = 0; i < formElements.length; i++) {
+                var element = formElements[i];
+
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                    element.disabled = true;
+                }
+            }
+
+            // Handle Edit/Save button click
+            editBtn.addEventListener("click", function () {
+                // Toggle the disabled attribute for form fields
+                for (var i = 0; i < formElements.length; i++) {
+                    var element = formElements[i];
+
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT" || element.tagName === "UL") {
+                        element.disabled = !element.disabled;
+                    }
+                }
+
+                // Change button text between "Edit" and "Save"
+                if (editBtnText.innerText === "Edit") {
+                    editBtnText.innerText = "Save";
+                } else {
+
+                    for (var i = 0; i < formElements.length; i++) {
+                        var element = formElements[i];
+
+                        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                            element.disabled = true;
+                        }
+                    }
+                    sendDataToApi();
+                    editBtnText.innerText = "Edit";
+                }
+            });
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body class="bg-gradient-primary"
+    style="background: url(&quot;/assets/img/avatars/6213932.jpg?h=b376917a1ba7f4ede431479bdc55d3a0&quot;);">
+    <div class="container" style="background: rgba(255,255,255,0);"><!-- Start: Split Button Secondary --><a
+            class="btn btn-secondary btn-icon-split" role="button" href="/comic" style="margin: 18px;"><span
+                class="text-white-50 icon"><i class="fas fa-arrow-left"></i></span><span class="text-white text"
+                style="background: #66c64e;">Back</span></a><!-- End: Split Button Secondary -->
+        <div class="row justify-content-center" style="background: rgba(255,255,255,0);">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5" style="background: rgba(255,255,255,0);">
+                    <div class="card-body p-0">
+                        <div class="row d-xxl-flex justify-content-center justify-content-xxl-center">
+                            <div class="col-lg-6" style="background: #ffffff;">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Create new comic</h4>
+                                    </div>
+                                    <form id="comicForm" class="comic">
+                                        <div class="mb-3"><input class="form-control form-control-user" type="text"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter comic name." name="Comic name"></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="text"
+                                                id="exampleInputEmail-1" aria-describedby="emailHelp"
+                                                placeholder="Enter author" name="Comic name"></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="text"
+                                                id="exampleInputEmail-2" aria-describedby="emailHelp"
+                                                placeholder="Enter deription" name="Comic name"></div>
+                                        <div class="row">
+                                            <div class="col">
+
+                                                <button class="btn btn-info btn-icon-split" role="button"
+                                                    id="addTopicBtn">
+                                                    <span class="text-white-50 icon"><i class="fas fa-plus"></i></span>
+                                                    <span class="text-white text">Add Topic</span>
+                                                </button>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="topics"><strong>Selected
+                                                            Topics</strong></label>
+                                                    <ul id="selectedTopicsList">
+                                                        {{#each data.topics}}
+                                                        <li>
+                                                            <span>{{this}}</span>
+                                                            <button
+                                                                class="btn btn-danger btn-sm ms-2 delete-topic-btn">Delete</button>
+                                                        </li>
+                                                        {{/each}}
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label class="form-label"
+                                                        for="topics"><strong>Topics</strong></label>
+                                                    <select class="form-select" id="topics" name="topics1">
+                                                        <!-- Options will be dynamically populated using JavaScript -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center shadow">
+                                                <img id="comicImage" class="img-thumbnail mb-3 mt-4"
+                                                    src="{{data.image_url}}" width="200" height="200">
+
+                                                <div class="mb-3"></div>
+                                                <button class="btn btn-info btn-icon-split" role="button"
+                                                    id="save_image">
+                                                    <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                                                    <span class="text-white text" id="editImageBtnText">Save
+                                                        Image</span>
+                                                </button>
+                                                <input type="file" id="upload4" style="display: none">
+
+                                                <!-- Add a button to trigger the file input -->
+                                                <button class="btn btn-info btn-icon-split" role="button"
+                                                    id="uploadButton">
+                                                    <span class="text-white-50 icon"><i
+                                                            class="fas fa-upload"></i></span>
+                                                    <span class="text-white text">Upload 4</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                        <div class="card shadow mb-4"></div>
+
+                                        <button
+                                            class="btn btn-primary fs-5 fw-bold text-center d-block d-xxl-flex justify-content-xxl-center btn-user w-100"
+                                            id="addComicBtn" type="submit">Add Comic</button>
+
+
+
+
+
+                                    </form>
+                                    <div class="text-center"></div>
+                                    <div class="text-center"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            var addTopicBtn = document.getElementById("addTopicBtn");
+            var selectedTopicsList = document.getElementById("selectedTopicsList");
+            var topicsSelect = document.getElementById("topics");
+
+
+            var topicsSelect = document.getElementById("topics");
+            var accessToken = localStorage.getItem("access_token");
+            // Handle the "Add Topic" button click
+            addTopicBtn.addEventListener("click", function (event) {
+                event.preventDefault(); // Add this line to prevent form submission
+
+                var selectedTopic = topicsSelect.value;
+
+                if (selectedTopic && !selectedTopicsList.querySelector(`[data-topic="${selectedTopic}"]`)) {
+                    var listItem = document.createElement("li");
+                    listItem.dataset.topic = selectedTopic;
+
+                    var topicText = document.createElement("span");
+                    topicText.textContent = selectedTopic;
+
+                    var deleteButton = document.createElement("button");
+                    deleteButton.className = "btn btn-danger btn-sm ms-2 delete-topic-btn";
+                    deleteButton.textContent = "Delete";
+                    deleteButton.addEventListener("click", function () {
+                        listItem.remove();
+                    });
+
+                    listItem.appendChild(topicText);
+                    listItem.appendChild(deleteButton);
+
+                    selectedTopicsList.appendChild(listItem);
+                }
+            });
+
+            // Handle the "Delete Topic" button click
+            selectedTopicsList.addEventListener("click", function (event) {
+                if (event.target.classList.contains("delete-topic-btn")) {
+                    event.target.closest("li").remove();
+                }
+            });
+
+
+
+
+
+            //get all topics
+            function fetchTopics() {
+                fetch("/v1/api/topic", {
+                    headers: {
+                        "Authorization": "Bearer " + accessToken,
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the dropdown with options
+                        data.data.forEach(topic => {
+                            var option = document.createElement("option");
+                            option.value = topic.name;
+                            option.text = topic.name;
+                            topicsSelect.add(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error fetching topics:", error);
+                    });
+            }
+
+            // Handle the file input change event   
+
+            fetchTopics();
+
+            var comicForm = document.getElementById("comicForm");
+            comicForm.addEventListener("submit", function (event) {
+                console.log('hihi')
+                event.preventDefault(); // Prevent the default form submission
+
+                var formData = new FormData();
+
+
+                var comicName = document.getElementById("exampleInputEmail").value;
+                var author = document.getElementById("exampleInputEmail-1").value;
+                var description = document.getElementById("exampleInputEmail-2").value;
+
+                // Gather selected topics from the list
+                var selectedTopics = [];
+                var topicsListItems = document.querySelectorAll("#selectedTopicsList li");
+                topicsListItems.forEach(item => {
+                    selectedTopics.push(item.dataset.topic);
+                });
+
+                formData.append("image", upload4.files[0]);
+                formData.append("comic_name", comicName);
+                formData.append("author", author);
+                formData.append("topics", selectedTopics);
+                formData.append("description", description);
+
+
+
+
+                fetch("/v1/api/comic/", {
+                    method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response data
+                        if(data.code ===200){
+                            window.location.href = "/comic";
+                        }
+                        // Additional actions if needed
+                    })
+                    .catch(error => {
+                        console.error("Error sending data:", error);
+                    });
+            });
+            uploadButton.addEventListener("click", function () {
+                upload4.click();
+            });
+            upload4.addEventListener("change", function (event) {
+                // Handle the file upload logic here
+                var selectedFile = event.target.files[0];
+                console.log("Selected file:", selectedFile);
+                // Add your file upload logic here
+                comicImage.src = URL.createObjectURL(selectedFile);
+            });
+
+            // ... existing code ...
+
+            function gatherFormData() {
+                // Gather form data from input fields
+
+            }
+
+
+
+        });
+
+
+    </script>
+</body>
+
+</html>

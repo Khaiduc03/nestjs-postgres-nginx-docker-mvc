@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=f0d3b1a983e367e41915fe7f7b583fa5">
+</head>
+
+<body class="bg-gradient-primary"
+    style="background: url(&quot;/assets/img/avatars/6213932.jpg?h=b376917a1ba7f4ede431479bdc55d3a0&quot;);">
+    <div class="container" style="background: rgba(255,255,255,0);"><!-- Start: Split Button Secondary --><a
+            class="btn btn-secondary btn-icon-split" role="button" href="/gender" style="margin: 18px;"><span
+                class="text-white-50 icon"><i class="fas fa-arrow-left"></i></span><span class="text-white text"
+                style="background: #66c64e;">Back</span></a><!-- End: Split Button Secondary -->
+        <div class="row justify-content-center" style="background: rgba(255,255,255,0);">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5" style="background: rgba(255,255,255,0);">
+                    <div class="card-body p-0">
+                        <div class="row d-xxl-flex justify-content-center justify-content-xxl-center">
+                            <div class="col-lg-6" style="background: #ffffff;">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Create new gender</h4>
+                                    </div>
+                                    <form id="genderForm" class="gender">
+                                        <div class="mb-3"><input class="form-control form-control-user" type="text"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter gender name" name="Gender name"></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="text"
+                                                id="exampleInputEmail-1" aria-describedby="emailHelp"
+                                                placeholder="Enter description" name="Gender name"></div>
+
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center shadow">
+                                                <img id="comicImage" class="img-thumbnail mb-3 mt-4"
+                                                    src="{{data.image_url}}" width="200" height="200">
+
+                                                <div class="mb-3"></div>
+                                                <button class="btn btn-info btn-icon-split" role="button"
+                                                    id="save_image">
+                                                    <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                                                    <span class="text-white text" id="editImageBtnText">Save
+                                                        Image</span>
+                                                </button>
+                                                <input type="file" id="upload4" style="display: none">
+
+                                                <!-- Add a button to trigger the file input -->
+                                                <button class="btn btn-info btn-icon-split" role="button"
+                                                    id="uploadButton">
+                                                    <span class="text-white-50 icon"><i
+                                                            class="fas fa-upload"></i></span>
+                                                    <span class="text-white text">Upload 4</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                        <div class="card shadow mb-4"></div>
+
+                                        <button
+                                            class="btn btn-primary fs-5 fw-bold text-center d-block d-xxl-flex justify-content-xxl-center btn-user w-100"
+                                            id="addComicBtn" type="submit">Add Gender</button>
+                                    </form>
+                                    <div class="text-center"></div>
+                                    <div class="text-center"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var addGenderBtn = document.getElementById("addGenderBtn");
+
+            var accessToken = localStorage.getItem("access_token");
+
+            var genderForm = document.getElementById("genderForm");
+            genderForm.addEventListener("submit", function (event) {
+                console.log('hihi')
+                event.preventDefault(); // Prevent the default form submission
+
+                var formData = new FormData();
+
+                var genderName = document.getElementById("exampleInputEmail").value;
+                var description = document.getElementById("exampleInputEmail-1").value;
+
+                // Gather selected topics from the list
+                var selectedTopics = [];
+                var topicsListItems = document.querySelectorAll("#selectedTopicsList li");
+                topicsListItems.forEach(item => {
+                    selectedTopics.push(item.dataset.topic);
+                });
+
+                formData.append("image", upload4.files[0]);
+                formData.append("name", genderName);
+                formData.append("description", description);
+
+                fetch("/v1/api/topic/", {
+                    method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response data
+                        if(data.code === 200){
+                            window.location.href = "/gender";
+                        }
+                        // Additional actions if needed
+                    })
+                    .catch(error => {
+                        console.error("Error sending data:", error);
+                    });
+            });
+            uploadButton.addEventListener("click", function () {
+                upload4.click();
+            });
+            upload4.addEventListener("change", function (event) {
+                // Handle the file upload logic here
+                var selectedFile = event.target.files[0];
+                console.log("Selected file:", selectedFile);
+                // Add your file upload logic here
+                comicImage.src = URL.createObjectURL(selectedFile);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

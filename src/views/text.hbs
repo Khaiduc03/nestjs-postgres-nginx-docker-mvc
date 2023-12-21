@@ -1,0 +1,167 @@
+<!-- ... (head content remains unchanged) ... -->
+
+<body class="bg-gradient-primary" style="background: rgb(254,254,255);margin: 20px;">
+    <div class="container-fluid">
+        <!-- ... (container content remains unchanged) ... -->
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center shadow">
+                        <img id="comicImage" class="img-thumbnail mb-3 mt-4" src="{{data.image_url}}" width="200"
+                            height="200">
+
+                        <div class="mb-3"></div>
+                        <button class="btn btn-info btn-icon-split" role="button" id="save_image">
+                            <span class="text-white-50 icon"><i class="fas fa-pen"></i></span>
+                            <span class="text-white text" id="editImageBtnText">Save Image</span>
+                        </button>
+                        <input type="file" id="upload4" style="display: none">
+
+                        <!-- Add a button to trigger the file input -->
+                        <button class="btn btn-info btn-icon-split" role="button" id="uploadButton">
+                            <span class="text-white-50 icon"><i class="fas fa-upload"></i></span>
+                            <span class="text-white text">Upload 4</span>
+                        </button>
+                        <form id="editForm">
+                            <div class="mb-3">
+                                <label class="form-label" for="signature"><strong>Description</strong></label>
+                                <textarea class="form-control" id="signature-1" rows="9" name="signature"
+                                    placeholder="description">{{data.description}}</textarea>
+                            </div>
+                            <div class="mb-3"></div>
+                            <div class="mb-3"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card shadow mb-4"></div>
+            </div>
+
+            <!-- ... (remaining content remains unchanged) ... -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.min.js?h=1498362f0b1098c6d47b8c31f7b76b9d"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var editBtn = document.getElementById("editBtn");
+        var editBtnText = document.getElementById("editBtnText");
+        var upload4 = document.getElementById("upload4");
+        var uploadButton = document.getElementById("uploadButton");
+        var comicImage = document.getElementById("comicImage");
+        var saveImageBtn = document.getElementById("save_image");
+
+        // Function to handle form elements and buttons
+        function handleForm(form) {
+            var formElements = form.elements;
+
+            // Disable form fields initially
+            for (var i = 0; i < formElements.length; i++) {
+                var element = formElements[i];
+
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                    element.disabled = true;
+                }
+            }
+
+            // Handle Edit/Save button click
+            editBtn.addEventListener("click", function () {
+                // Toggle the disabled attribute for form fields
+                for (var i = 0; i < formElements.length; i++) {
+                    var element = formElements[i];
+
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                        element.disabled = !element.disabled;
+                    }
+                }
+
+                // Change button text between "Edit" and "Save"
+                if (editBtnText.innerText === "Edit") {
+                    editBtnText.innerText = "Save";
+                } else {
+                    for (var i = 0; i < formElements.length; i++) {
+                        var element = formElements[i];
+
+                        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "SELECT") {
+                            element.disabled = true;
+                        }
+                    }
+                    editBtnText.innerText = "Edit";
+                }
+            });
+        }
+
+        // Initial handling for editForm1
+        var editForm1 = document.getElementById("editForm1");
+        handleForm(editForm1);
+
+        // Event listener for switching to editForm1
+        editBtn.addEventListener("click", function () {
+            handleForm(editForm1);
+        });
+
+        // Event listener for switching to editForm2 (you can add more logic based on your requirements)
+        // var editForm2 = document.getElementById("editForm2");
+        // SomeButtonForForm2.addEventListener("click", function () {
+        //     handleForm(editForm2);
+        // });
+
+        saveImageBtn.addEventListener("click", function () {
+            // Get the selected file
+            var selectedFile = upload4.files[0];
+
+            // Check if a file is selected
+            if (selectedFile) {
+                // Create a FormData object and append the file to it
+                var formData = new FormData();
+                formData.append("image", selectedFile);
+                formData.append("uuid", `{{data.uuid}}`);
+                var accessToken = localStorage.getItem("access_token");
+
+                // Determine the correct form based on your logic
+                var currentForm = editForm1; // Change this based on your logic
+
+                // Make a POST request to your API endpoint
+                fetch("/v1/api/comic/update-image", {
+                    method: "PUT",
+                    body: formData,
+                    headers: {
+                        "Authorization": "Bearer " + accessToken,
+                    },
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Handle the response data
+                        console.log("Image uploaded successfully:", data);
+                        // Update the image URL or perform any other necessary actions
+                    })
+                    .catch(error => {
+                        console.error("Error during image upload:", error);
+                    });
+            } else {
+                console.error("No file selected");
+            }
+        });
+
+        uploadButton.addEventListener("click", function () {
+            upload4.click();
+        });
+
+        upload4.addEventListener("change", function (event) {
+            // Handle the file upload logic here
+            var selectedFile = event.target.files[0];
+            console.log("Selected file:", selectedFile);
+            // Add your file upload logic here
+            comicImage.src = URL.createObjectURL(selectedFile);
+        });
+
+    });
+</script>
+
+</body>
+
+</html>

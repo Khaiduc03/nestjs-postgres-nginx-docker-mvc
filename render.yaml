@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: nestjs
+    dockerfile: Dockerfile
+    env:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          service: postgres
+          name: POSTGRES_HOST
+      - key: POSTGRES_PORT
+        value: "5432"
+      - key: POSTGRES_USER
+        fromDatabase:
+          service: postgres
+          name: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          service: postgres
+          name: POSTGRES_PASSWORD
+      - key: POSTGRES_DB
+        fromDatabase:
+          service: postgres
+          name: POSTGRES_DB
